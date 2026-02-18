@@ -1,0 +1,15 @@
+/home/pc/Desktop/project/currency-converter-dotnet/bin/Debug/net10.0/currency-converter-dotnet
+/home/pc/Desktop/project/currency-converter-dotnet/bin/Debug/net10.0/currency-converter-dotnet.deps.json
+/home/pc/Desktop/project/currency-converter-dotnet/bin/Debug/net10.0/currency-converter-dotnet.runtimeconfig.json
+/home/pc/Desktop/project/currency-converter-dotnet/bin/Debug/net10.0/currency-converter-dotnet.dll
+/home/pc/Desktop/project/currency-converter-dotnet/bin/Debug/net10.0/currency-converter-dotnet.pdb
+/home/pc/Desktop/project/currency-converter-dotnet/obj/Debug/net10.0/currency-converter-dotnet.GeneratedMSBuildEditorConfig.editorconfig
+/home/pc/Desktop/project/currency-converter-dotnet/obj/Debug/net10.0/currency-converter-dotnet.AssemblyInfoInputs.cache
+/home/pc/Desktop/project/currency-converter-dotnet/obj/Debug/net10.0/currency-converter-dotnet.AssemblyInfo.cs
+/home/pc/Desktop/project/currency-converter-dotnet/obj/Debug/net10.0/currency-converter-dotnet.csproj.CoreCompileInputs.cache
+/home/pc/Desktop/project/currency-converter-dotnet/obj/Debug/net10.0/currency-converter-dotnet.sourcelink.json
+/home/pc/Desktop/project/currency-converter-dotnet/obj/Debug/net10.0/currency-converter-dotnet.dll
+/home/pc/Desktop/project/currency-converter-dotnet/obj/Debug/net10.0/refint/currency-converter-dotnet.dll
+/home/pc/Desktop/project/currency-converter-dotnet/obj/Debug/net10.0/currency-converter-dotnet.pdb
+/home/pc/Desktop/project/currency-converter-dotnet/obj/Debug/net10.0/currency-converter-dotnet.genruntimeconfig.cache
+/home/pc/Desktop/project/currency-converter-dotnet/obj/Debug/net10.0/ref/currency-converter-dotnet.dll
