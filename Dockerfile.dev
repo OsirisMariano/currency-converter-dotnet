@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0
+
+WORKDIR /app
+
+# Copia apenas arquivos de projeto para restaurar dependências (cache layer)
+COPY currency-converter-dotnet.sln ./
+COPY currency-converter-dotnet.csproj ./
+RUN dotnet restore
+
+# Copia todo o código-fonte
+COPY Program.cs ./
+
+ENTRYPOINT ["dotnet", "watch", "run", "--no-restore"]

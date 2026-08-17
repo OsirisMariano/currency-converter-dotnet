@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: currency-converter-dev
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+      - app-data:/app/data
+    environment:
+      - DOTNET_CLI_TELEMETRY_OPTOUT=1
+      - DOTNET_NOLOGO=1
+
+volumes:
+  app-data:
