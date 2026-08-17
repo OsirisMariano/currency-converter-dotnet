@@ -20,27 +20,65 @@ public class ConvertCommand
         AnsiConsole.MarkupLine("[bold blue]💱 Conversão de Moedas[/]");
         AnsiConsole.WriteLine();
 
-        var currencyChoices = Enum.GetValues<Currency>()
-            .ToDictionary(c => c.GetDisplayName(), c => c);
+        var currencies = Enum.GetValues<Currency>().ToList();
 
-        var fromDisplay = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-                .Title("[bold yellow]Moeda de origem:[/]")
-                .HighlightStyle(new Style(Color.Yellow))
-                .AddChoices(currencyChoices.Keys));
+        var fromTable = new Table()
+            .Border(TableBorder.Rounded)
+            .BorderColor(Color.Blue)
+            .Title("[bold]Moeda de Origem[/]")
+            .AddColumn(new TableColumn("[bold]#[/]").Centered())
+            .AddColumn(new TableColumn("[bold]Moeda[/]").Centered())
+            .AddColumn(new TableColumn("[bold]Nome[/]").Centered());
 
-        var toDisplay = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-                .Title("[bold yellow]Moeda de destino:[/]")
-                .HighlightStyle(new Style(Color.Yellow))
-                .AddChoices(currencyChoices.Keys));
+        for (int i = 0; i < currencies.Count; i++)
+        {
+            var c = currencies[i];
+            fromTable.AddRow($"[yellow]{i + 1}[/]", $"{c.GetSymbol()} {c}", c.GetName());
+        }
+
+        AnsiConsole.Write(fromTable);
+        AnsiConsole.WriteLine();
+
+        var fromIndex = AnsiConsole.Prompt(
+            new TextPrompt<int>("[bold yellow]Digite o número da moeda de origem:[/]")
+                .Validate(val => val >= 1 && val <= currencies.Count
+                    ? ValidationResult.Success()
+                    : ValidationResult.Error($"Escolha um número entre 1 e {currencies.Count}")));
+
+        Console.Clear();
+
+        AnsiConsole.MarkupLine("[bold blue]💱 Conversão de Moedas[/]");
+        AnsiConsole.WriteLine();
+
+        var toTable = new Table()
+            .Border(TableBorder.Rounded)
+            .BorderColor(Color.Blue)
+            .Title("[bold]Moeda de Destino[/]")
+            .AddColumn(new TableColumn("[bold]#[/]").Centered())
+            .AddColumn(new TableColumn("[bold]Moeda[/]").Centered())
+            .AddColumn(new TableColumn("[bold]Nome[/]").Centered());
+
+        for (int i = 0; i < currencies.Count; i++)
+        {
+            var c = currencies[i];
+            toTable.AddRow($"[yellow]{i + 1}[/]", $"{c.GetSymbol()} {c}", c.GetName());
+        }
+
+        AnsiConsole.Write(toTable);
+        AnsiConsole.WriteLine();
+
+        var toIndex = AnsiConsole.Prompt(
+            new TextPrompt<int>("[bold yellow]Digite o número da moeda de destino:[/]")
+                .Validate(val => val >= 1 && val <= currencies.Count
+                    ? ValidationResult.Success()
+                    : ValidationResult.Error($"Escolha um número entre 1 e {currencies.Count}")));
 
         var amount = AnsiConsole.Prompt(
-            new TextPrompt<double>("[bold yellow]Valor:[/]")
+            new TextPrompt<double>("[bold yellow]Digite o valor:[/]")
                 .Validate(val => val > 0 ? ValidationResult.Success() : ValidationResult.Error("O valor deve ser maior que zero")));
 
-        var from = currencyChoices[fromDisplay];
-        var to = currencyChoices[toDisplay];
+        var from = currencies[fromIndex - 1];
+        var to = currencies[toIndex - 1];
 
         var exchangeRate = await _exchangeRateService.GetRatesAsync(from);
         var rate = exchangeRate.GetRate(from, to);
@@ -48,7 +86,8 @@ public class ConvertCommand
 
         var table = new Table()
             .Border(TableBorder.Rounded)
-            .BorderColor(Color.Blue)
+            .BorderColor(Color.Green)
+            .Title("[bold green]Resultado[/]")
             .AddColumn(new TableColumn("[bold]Detalhe[/]").Centered())
             .AddColumn(new TableColumn("[bold]Valor[/]").Centered())
             .AddRow("Moeda de Origem", $"{from.GetSymbol()} {amount:N2} {from}")
@@ -60,7 +99,6 @@ public class ConvertCommand
         AnsiConsole.Write(table);
 
         AnsiConsole.WriteLine();
-        AnsiConsole.MarkupLine("[dim]Pressione qualquer tecla para continuar...[/]");
-        Console.ReadKey(true);
+        AnsiConsole.Prompt(new TextPrompt<string>("[dim]Pressione Enter para continuar...[/]").AllowEmpty());
     }
 }
