@@ -4,10 +4,10 @@ WORKDIR /app
 
 # Copia apenas arquivos de projeto para restaurar dependências (cache layer)
 COPY currency-converter-dotnet.sln ./
-COPY currency-converter-dotnet.csproj ./
-RUN dotnet restore
+COPY src/CurrencyConverter/CurrencyConverter.csproj src/CurrencyConverter/
+RUN dotnet restore src/CurrencyConverter/CurrencyConverter.csproj
 
 # Copia todo o código-fonte
-COPY Program.cs ./
+COPY src/ src/
 
-ENTRYPOINT ["dotnet", "watch", "run", "--no-restore"]
+ENTRYPOINT ["dotnet", "run", "--project", "src/CurrencyConverter"]
