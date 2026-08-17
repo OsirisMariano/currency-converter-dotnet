@@ -20,24 +20,27 @@ public class ConvertCommand
         AnsiConsole.MarkupLine("[bold blue]💱 Conversão de Moedas[/]");
         AnsiConsole.WriteLine();
 
-        var fromCurrency = AnsiConsole.Prompt(
+        var currencyChoices = Enum.GetValues<Currency>()
+            .ToDictionary(c => c.GetDisplayName(), c => c);
+
+        var fromDisplay = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("[bold yellow]Moeda de origem:[/]")
                 .HighlightStyle(new Style(Color.Yellow))
-                .AddChoices(Enum.GetNames<Currency>().Select(c => $"{GetSymbol(c)} {c} - {GetName(c)}")));
+                .AddChoices(currencyChoices.Keys));
 
-        var toCurrency = AnsiConsole.Prompt(
+        var toDisplay = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("[bold yellow]Moeda de destino:[/]")
                 .HighlightStyle(new Style(Color.Yellow))
-                .AddChoices(Enum.GetNames<Currency>().Select(c => $"{GetSymbol(c)} {c} - {GetName(c)}")));
+                .AddChoices(currencyChoices.Keys));
 
         var amount = AnsiConsole.Prompt(
             new TextPrompt<double>("[bold yellow]Valor:[/]")
                 .Validate(val => val > 0 ? ValidationResult.Success() : ValidationResult.Error("O valor deve ser maior que zero")));
 
-        var from = Enum.Parse<Currency>(fromCurrency.Split(' ')[1]);
-        var to = Enum.Parse<Currency>(toCurrency.Split(' ')[1]);
+        var from = currencyChoices[fromDisplay];
+        var to = currencyChoices[toDisplay];
 
         var exchangeRate = await _exchangeRateService.GetRatesAsync(from);
         var rate = exchangeRate.GetRate(from, to);
@@ -48,8 +51,8 @@ public class ConvertCommand
             .BorderColor(Color.Blue)
             .AddColumn(new TableColumn("[bold]Detalhe[/]").Centered())
             .AddColumn(new TableColumn("[bold]Valor[/]").Centered())
-            .AddRow("Moeda de Origem", $"{GetSymbol(from)} {amount:N2} {from}")
-            .AddRow("Moeda de Destino", $"{GetSymbol(to)} {result:N2} {to}")
+            .AddRow("Moeda de Origem", $"{from.GetSymbol()} {amount:N2} {from}")
+            .AddRow("Moeda de Destino", $"{to.GetSymbol()} {result:N2} {to}")
             .AddRow("Taxa de Câmbio", $"1 {from} = {rate:N4} {to}")
             .AddRow("Data/Hora", DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
 
@@ -60,26 +63,4 @@ public class ConvertCommand
         AnsiConsole.MarkupLine("[dim]Pressione qualquer tecla para continuar...[/]");
         Console.ReadKey(true);
     }
-
-    private static string GetSymbol(Currency currency) => currency switch
-    {
-        Currency.BRL => "R$",
-        Currency.USD => "$",
-        Currency.EUR => "€",
-        Currency.GBP => "£",
-        Currency.JPY => "¥",
-        Currency.ARS => "$",
-        _ => currency.ToString()
-    };
-
-    private static string GetName(Currency currency) => currency switch
-    {
-        Currency.BRL => "Real Brasileiro",
-        Currency.USD => "Dólar Americano",
-        Currency.EUR => "Euro",
-        Currency.GBP => "Libra Esterlina",
-        Currency.JPY => "Iene Japonês",
-        Currency.ARS => "Peso Argentino",
-        _ => currency.ToString()
-    };
 }
