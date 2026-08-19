@@ -1,8 +1,8 @@
 using System.Net.Http.Json;
 using System.Text.Json;
-using CurrencyConverter.Models;
+using TrocaMoedas.Models;
 
-namespace CurrencyConverter.Services;
+namespace TrocaMoedas.Services;
 
 public class ExchangeRateApiService : IExchangeRateService
 {

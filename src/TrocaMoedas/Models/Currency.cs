@@ -1,4 +1,4 @@
-namespace CurrencyConverter.Models;
+namespace TrocaMoedas.Models;
 
 public enum Currency
 {

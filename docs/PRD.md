@@ -64,18 +64,18 @@ Usuários gerais que precisam de conversões rápidas e confiáveis no terminal.
 ## 5. Estrutura de Pastas
 
 ```
-currency-converter-dotnet/
+troca-moedas/
 ├── docker-compose.yml          # Ambiente dev (hot reload)
 ├── docker-compose.prod.yml     # Ambiente prod
 ├── Dockerfile                  # Produção (multi-stage)
 ├── Dockerfile.dev              # Desenvolvimento
 ├── .dockerignore
-├── currency-converter-dotnet.sln
+├── troca-moedas.sln
 ├── docs/
 │   └── PRD.md
 ├── src/
-│   └── CurrencyConverter/
-│       ├── CurrencyConverter.csproj
+│   └── TrocaMoedas/
+│       ├── TrocaMoedas.csproj
 │       ├── Program.cs
 │       ├── Commands/
 │       │   ├── MenuCommand.cs
@@ -97,8 +97,8 @@ currency-converter-dotnet/
 │       └── Configuration/
 │           └── AppConfig.cs
 ├── tests/
-│   └── CurrencyConverter.Tests/
-│       ├── CurrencyConverter.Tests.csproj
+│   └── TrocaMoedas.Tests/
+│       ├── TrocaMoedas.Tests.csproj
 │       ├── Services/
 │       │   ├── ExchangeRateApiServiceTests.cs
 │       │   └── FallbackExchangeRateServiceTests.cs

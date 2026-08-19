@@ -1,6 +1,6 @@
 using Spectre.Console;
 
-namespace CurrencyConverter.Commands;
+namespace TrocaMoedas.Commands;
 
 public class MenuCommand
 {

@@ -1,8 +1,8 @@
-using CurrencyConverter.Models;
-using CurrencyConverter.Services;
+using TrocaMoedas.Models;
+using TrocaMoedas.Services;
 using Spectre.Console;
 
-namespace CurrencyConverter.Commands;
+namespace TrocaMoedas.Commands;
 
 public class ConvertCommand
 {
