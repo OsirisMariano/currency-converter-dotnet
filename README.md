@@ -1,40 +1,87 @@
-# 💰 Conversor de Moedas (Console Application)
+# Troca Moedas
 
-> Projeto desenvolvido para fins de aprendizado sobre lógica de programação, 
-> tipos de dados e manipulação de entrada/saída com .NET e C#.
+Conversão de moedas direto do terminal — rápido, prático e containerizado.
 
-## 🎯 Objetivo do Projeto
-Automatizar a tarefa cotidiana de converter valores entre diferentes moedas (inicialmente Real para Dólar), permitindo que o usuário obtenha resultados rápidos através de uma interface de linha de comando (CLI).
+## Sobre
 
-## 🛠️ Tecnologias Utilizadas
-* **Linguagem:** C# (C-Sharp).
-* **Plataforma:** .NET (Multiplataforma).
-* **IDE Sugerida:** Visual Studio 2022 ou Visual Studio Code.
+Ferramenta de linha de comando para converter valores entre diferentes moedas com taxas de câmbio atualizadas. Interface interativa, validação de entrada e total suporte a Docker.
 
-## 📋 Funcionalidades
-- [x] Entrada de valor em Reais (BRL) via teclado.
-- [x] Processamento matemático com taxa de câmbio atualizável.
-- [x] Exibição do valor convertido em Dólares (USD) com formatação decimal.
+## Moedas Suportadas
 
-## 🚀 Como Executar o Projeto
+| Moeda | Código | Nome             |
+|-------|--------|------------------|
+| R$    | BRL    | Real Brasileiro  |
+| $     | USD    | Dólar Americano  |
+| €     | EUR    | Euro             |
+| £     | GBP    | Libra Esterlina  |
+| ¥     | JPY    | Iene Japonês     |
+| $     | ARS    | Peso Argentino   |
 
-1. **Pré-requisitos:**
-   - Possuir o [.NET SDK](https://dotnet.microsoft.com/download) instalado em sua máquina.
+## Funcionalidades
 
-2. **Clonagem ou Criação:**
-   - Clone este repositório ou crie um novo projeto do tipo `Console App` no seu ambiente.
+- Taxas de câmbio em tempo real via API, com fallback automático
+- Interface de terminal com tabelas, cores e menus navegáveis
+- Validação de entrada em todas as etapas
+- Suporte a conversão entre quaisquer duas moedas da lista
+- Ambiente 100% containerizado com Docker
 
-3. **Execução:**
-   - No terminal, dentro da pasta do projeto, digite:
-     ```bash
-     dotnet run
-     ```
+## Stack Tecnológica
 
-## 🏗️ Estrutura de Código (Lógica)
-O projeto segue uma execução estruturada (de cima para baixo):
-1. **Entrada:** O programa solicita os dados ao usuário através do `Console.ReadLine()`.
-2. **Processamento:** Converte o texto recebido em um tipo numérico (`float` ou `double`) e realiza o cálculo.
-3. **Saída:** Exibe o resultado utilizando o `Console.WriteLine()`.
+| Camada        | Tecnologia                          |
+|---------------|--------------------------------------|
+| Runtime       | .NET 10                              |
+| Linguagem     | C#                                   |
+| UI Terminal   | Spectre.Console                      |
+| API de Câmbio | ExchangeRate-API                     |
+| Container     | Docker + docker-compose              |
 
-## 📝 Licença
-Este projeto é para fins educacionais e segue o modelo de código aberto.
+## Como Rodar
+
+### Com Docker (recomendado)
+
+```bash
+docker compose up --build
+```
+
+### Sem Docker
+
+```bash
+dotnet run --project src/TrocaMoedas
+```
+
+### Variável de Ambiente (opcional)
+
+Para usar taxas em tempo real, configure sua API key:
+
+```bash
+export EXCHANGE_RATE_API_KEY=sua-chave-aqui
+```
+
+> Se não configurada, o sistema usa taxas de fallback automaticamente.
+
+## Estrutura do Projeto
+
+```
+troca-moedas/
+├── Dockerfile.dev
+├── docker-compose.yml
+├── src/TrocaMoedas/
+│   ├── Program.cs
+│   ├── Commands/
+│   │   ├── MenuCommand.cs
+│   │   └── ConvertCommand.cs
+│   ├── Services/
+│   │   ├── IExchangeRateService.cs
+│   │   ├── ExchangeRateApiService.cs
+│   │   └── FallbackExchangeRateService.cs
+│   └── Models/
+│       ├── Currency.cs
+│       ├── Conversion.cs
+│       └── ExchangeRate.cs
+└── docs/
+    └── PRD.md
+```
+
+## Licença
+
+Projeto open source para fins educacionais e profissionais.
