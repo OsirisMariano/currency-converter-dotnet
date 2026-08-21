@@ -34,6 +34,8 @@ Ferramenta de linha de comando para converter valores entre diferentes moedas co
 | UI Terminal   | Spectre.Console                      |
 | API de Câmbio | ExchangeRate-API                     |
 | Container     | Docker + docker-compose              |
+| Arquitetura   | Clean Architecture (4 camadas)       |
+| DI Container  | Microsoft.Extensions.DependencyInjection |
 
 ## Como Rodar
 
@@ -46,7 +48,7 @@ docker compose up --build
 ### Sem Docker
 
 ```bash
-dotnet run --project src/TrocaMoedas
+dotnet run --project src/TrocaMoedas.Presentation
 ```
 
 ### Variável de Ambiente (opcional)
@@ -65,21 +67,40 @@ export EXCHANGE_RATE_API_KEY=sua-chave-aqui
 troca-moedas/
 ├── Dockerfile.dev
 ├── docker-compose.yml
-├── src/TrocaMoedas/
-│   ├── Program.cs
-│   ├── Commands/
-│   │   ├── MenuCommand.cs
-│   │   └── ConvertCommand.cs
-│   ├── Services/
-│   │   ├── IExchangeRateService.cs
-│   │   ├── ExchangeRateApiService.cs
-│   │   └── FallbackExchangeRateService.cs
-│   └── Models/
-│       ├── Currency.cs
-│       ├── Conversion.cs
-│       └── ExchangeRate.cs
+├── src/
+│   ├── TrocaMoedas.Domain/              # Entidades (sem dependências)
+│   │   └── Models/
+│   │       ├── Currency.cs
+│   │       ├── Conversion.cs
+│   │       └── ExchangeRate.cs
+│   ├── TrocaMoedas.Application/         # Interfaces e DTOs
+│   │   ├── Services/
+│   │   │   └── IExchangeRateService.cs
+│   │   ├── Repositories/
+│   │   │   └── IConversionRepository.cs
+│   │   └── DTOs/
+│   │       └── ConversionResult.cs
+│   ├── TrocaMoedas.Infrastructure/    # Implementações
+│   │   ├── Services/
+│   │   │   ├── ExchangeRateApiService.cs
+│   │   │   └── FallbackExchangeRateService.cs
+│   │   ├── Data/
+│   │   │   ├── DatabaseInitializer.cs
+│   │   │   └── Repositories/
+│   │   │       └── SqliteConversionRepository.cs
+│   │   └── Configuration/
+│   │       └── AppConfig.cs
+│   └── TrocaMoedas.Presentation/      # UI e Orquestração
+│       ├── Program.cs
+│       └── Commands/
+│           ├── MenuCommand.cs
+│           ├── ConvertCommand.cs
+│           └── HistoryCommand.cs
+├── tests/
+│   └── CurrencyConverter.Tests/
 └── docs/
-    └── PRD.md
+    ├── PRD.md
+    └── sprint-plan.md
 ```
 
 ## Licença

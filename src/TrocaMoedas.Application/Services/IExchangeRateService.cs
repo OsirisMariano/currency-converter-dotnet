@@ -1,6 +1,6 @@
-using TrocaMoedas.Models;
+using TrocaMoedas.Domain.Models;
 
-namespace TrocaMoedas.Services;
+namespace TrocaMoedas.Application.Services;
 
 public interface IExchangeRateService
 {

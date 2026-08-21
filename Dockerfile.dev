@@ -4,10 +4,13 @@ WORKDIR /app
 
 # Copia apenas arquivos de projeto para restaurar dependências (cache layer)
 COPY troca-moedas.sln ./
-COPY src/TrocaMoedas/TrocaMoedas.csproj src/TrocaMoedas/
-RUN dotnet restore src/TrocaMoedas/TrocaMoedas.csproj
+COPY src/TrocaMoedas.Presentation/TrocaMoedas.Presentation.csproj src/TrocaMoedas.Presentation/
+COPY src/TrocaMoedas.Application/TrocaMoedas.Application.csproj src/TrocaMoedas.Application/
+COPY src/TrocaMoedas.Domain/TrocaMoedas.Domain.csproj src/TrocaMoedas.Domain/
+COPY src/TrocaMoedas.Infrastructure/TrocaMoedas.Infrastructure.csproj src/TrocaMoedas.Infrastructure/
+RUN dotnet restore src/TrocaMoedas.Presentation/TrocaMoedas.Presentation.csproj
 
 # Copia todo o código-fonte
 COPY src/ src/
 
-ENTRYPOINT ["dotnet", "run", "--project", "src/TrocaMoedas"]
+ENTRYPOINT ["dotnet", "run", "--project", "src/TrocaMoedas.Presentation"]

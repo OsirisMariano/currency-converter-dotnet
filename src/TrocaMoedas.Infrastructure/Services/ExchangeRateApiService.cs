@@ -1,8 +1,8 @@
-using System.Net.Http.Json;
 using System.Text.Json;
-using TrocaMoedas.Models;
+using TrocaMoedas.Application.Services;
+using TrocaMoedas.Domain.Models;
 
-namespace TrocaMoedas.Services;
+namespace TrocaMoedas.Infrastructure.Services;
 
 public class ExchangeRateApiService : IExchangeRateService
 {

@@ -72,33 +72,40 @@ troca-moedas/
 ├── .dockerignore
 ├── troca-moedas.sln
 ├── docs/
-│   └── PRD.md
+│   ├── PRD.md
+│   └── sprint-plan.md
 ├── src/
-│   └── TrocaMoedas/
-│       ├── TrocaMoedas.csproj
+│   ├── TrocaMoedas.Domain/           # Entidades puras (sem dependências)
+│   │   └── Models/
+│   │       ├── Currency.cs
+│   │       ├── ExchangeRate.cs
+│   │       └── Conversion.cs
+│   ├── TrocaMoedas.Application/      # Interfaces e DTOs
+│   │   ├── Services/
+│   │   │   └── IExchangeRateService.cs
+│   │   ├── Repositories/
+│   │   │   └── IConversionRepository.cs
+│   │   └── DTOs/
+│   │       └── ConversionResult.cs
+│   ├── TrocaMoedas.Infrastructure/   # Implementações concretas
+│   │   ├── Services/
+│   │   │   ├── ExchangeRateApiService.cs
+│   │   │   └── FallbackExchangeRateService.cs
+│   │   ├── Data/
+│   │   │   ├── DatabaseInitializer.cs
+│   │   │   └── Repositories/
+│   │   │       └── SqliteConversionRepository.cs
+│   │   └── Configuration/
+│   │       └── AppConfig.cs
+│   └── TrocaMoedas.Presentation/     # UI e Orquestração (entry point)
 │       ├── Program.cs
-│       ├── Commands/
-│       │   ├── MenuCommand.cs
-│       │   ├── ConvertCommand.cs
-│       │   └── HistoryCommand.cs
-│       ├── Services/
-│       │   ├── IExchangeRateService.cs
-│       │   ├── ExchangeRateApiService.cs
-│       │   ├── FallbackExchangeRateService.cs
-│       │   └── CacheService.cs
-│       ├── Models/
-│       │   ├── Conversion.cs
-│       │   ├── Currency.cs
-│       │   └── ExchangeRate.cs
-│       ├── Data/
-│       │   ├── IConversionRepository.cs
-│       │   ├── SqliteConversionRepository.cs
-│       │   └── DatabaseInitializer.cs
-│       └── Configuration/
-│           └── AppConfig.cs
+│       └── Commands/
+│           ├── MenuCommand.cs
+│           ├── ConvertCommand.cs
+│           └── HistoryCommand.cs
 ├── tests/
-│   └── TrocaMoedas.Tests/
-│       ├── TrocaMoedas.Tests.csproj
+│   └── CurrencyConverter.Tests/
+│       ├── CurrencyConverter.Tests.csproj
 │       ├── Services/
 │       │   ├── ExchangeRateApiServiceTests.cs
 │       │   └── FallbackExchangeRateServiceTests.cs
@@ -149,6 +156,8 @@ troca-moedas/
 | Testes | xUnit + Moq | Padrão da comunidade .NET |
 | API | exchangerate-api.com | Gratuita, sem API key |
 | Docker | 100% containerizado | Consistência entre ambientes |
+| Arquitetura | Clean Architecture | Testabilidade, manutenibilidade |
+| DI | Microsoft.Extensions.DependencyInjection | Nativo do .NET
 
 ## 10. Fluxo de Desenvolvimento
 
