@@ -1,4 +1,4 @@
-namespace TrocaMoedas.Models;
+namespace TrocaMoedas.Domain.Models;
 
 public record Conversion
 {

@@ -1,6 +1,7 @@
-using TrocaMoedas.Models;
+using TrocaMoedas.Application.Services;
+using TrocaMoedas.Domain.Models;
 
-namespace TrocaMoedas.Services;
+namespace TrocaMoedas.Infrastructure.Services;
 
 public class FallbackExchangeRateService : IExchangeRateService
 {
