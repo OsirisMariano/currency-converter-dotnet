@@ -51,4 +51,4 @@ project.fragment.lock.json
 Thumbs.db
 
 ## Docker
-docker-compose.prod.yml
+docker-compose.override.yml
