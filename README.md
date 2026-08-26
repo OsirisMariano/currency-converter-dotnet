@@ -103,6 +103,30 @@ troca-moedas/
     └── sprint-plan.md
 ```
 
+## Roadmap
+
+### Sprint 1 — Fundação ✅
+- [x] Clean Architecture (4 projetos)
+- [x] Conversão multi-moeda com API real
+- [x] Persistência SQLite (histórico de conversões)
+- [x] Interface terminal com Spectre.Console
+- [x] Docker dev (hot reload)
+
+### Sprint 2 — Cache & Testes
+- [ ] Projeto de testes (xUnit + Moq)
+- [ ] Testes unitários: Models, Services, Commands
+- [ ] Testes de integração: SQLite
+- [ ] Cache de taxas (1h TTL)
+- [ ] Cobertura 80%+
+
+### Sprint 3 — Deploy & CI/CD
+- [ ] Dockerfile multi-stage produção
+- [ ] docker-compose.prod.yml
+- [ ] GitHub Actions CI (build + test)
+- [ ] Validação final MVP
+
+Veja as [issues detalhadas](https://github.com/OsirisMariano/troca-moedas/issues) para cada tarefa.
+
 ## Licença
 
 Projeto open source para fins educacionais e profissionais.
