@@ -118,9 +118,12 @@ A migração para Clean Architecture foi implementada com sucesso:
 | 5️⃣ | P-02-05 | Testes unitários - ConvertCommand (com mocks) | 5 | Mock service/repositorio |
 | 6️⃣ | P-02-06 | Testes de integração - SqliteConversionRepository | 8 | DB em memória, testa CRUD |
 | 7️⃣ | P-02-07 | Configurar cobertura de testes (80%+) | 3 | Relatório gerado |
-| 8️⃣ | P-02-08 | Implementar `CacheService` (1h cache) | 5 | Cacheia taxas, expire após 1h |
+| 8️⃣ | P-02-08a | Definir design do CacheService (escopo, TTL, limites) | 2 | Decisões documentadas na issue #23 |
+| 9️⃣ | P-02-08 | Implementar `CacheService` (1h cache) | 5 | Cacheia taxas, expire após 1h |
+| 🔟 | P-02-04a | Implementar backoff exponencial para rate limits da API | 3 | Retry com backoff 1s→2s→4s→8s, máx 3 tentativas |
+| 1️⃣1️⃣ | P-02-06a | Implementar botão "Limpar histórico" na UI | 3 | Opção no menu, confirmação antes de apagar |
 
-**Total Sprint 2**: 39 SP | **Duração**: 7-10 dias | **Time**: 2 devs
+**Total Sprint 2**: 49 SP | **Duração**: 7-10 dias | **Time**: 2 devs
 
 **⚠️ Importante**: Testes vêm primeiro para validar código existente.
 CacheService é último (menor prioridade técnica atual).
@@ -161,7 +164,7 @@ CacheService é último (menor prioridade técnica atual).
 | Ordem | Sprint | Semana | SP Planejado | Conclusão | Status |
 |-------|--------|--------|-------------|-----------|--------|
 | ✅ | Sprint 1 | Semana 1-3 | 63 SP | Clean Architecture + SQLite + Histórico + Validação | Concluída |
-| 1️⃣ | Sprint 2 | Semana 2 | 39 SP | Cache + Testes Unitários | Pendente |
+| 1️⃣ | Sprint 2 | Semana 2 | 49 SP | Cache + Testes Unitários + Decisões de Design | Em andamento |
 | 2️⃣ | Sprint 3 | Semana 4 | 16 SP | Docker + CI/CD | Pendente |
 
 **MVP Completo estimado**: 1-2 semanas restantes com time de 2 devs
@@ -172,11 +175,11 @@ CacheService é último (menor prioridade técnica atual).
 
 ---
 
-## ❓ Decisões Pendentes (PO precisa decidir antes da Sprint 2)
+## ❓ Decisões Pendentes (convertidas em issues)
 
-1. **CacheService**: Cachear por base currency? Tamanho máximo cache? (Sprint 2)
-2. **Testes de integração**: Incluir teste de API real opcional? (Sprint 2)
-3. **Rate limits API**: Backoff exponencial para throttling? (Sprint 2)
+1. **CacheService design** → [Issue #23](https://github.com/OsirisMariano/troca-moedas/issues/23) (P-02-08a)
+2. **Rate limits API** → [Issue #25](https://github.com/OsirisMariano/troca-moedas/issues/25) (P-02-04a)
+3. **Limpar histórico UI** → [Issue #24](https://github.com/OsirisMariano/troca-moedas/issues/24) (P-02-06a)
 
 ---
 
