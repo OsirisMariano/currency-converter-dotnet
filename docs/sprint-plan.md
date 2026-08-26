@@ -111,7 +111,7 @@ A migração para Clean Architecture foi implementada com sucesso:
 
 | Ordem | ID | Tarefa | SP | Critério de Aceite |
 |-------|----|--------|-----|-------------------|
-| 1️⃣ | P-02-01 | Configurar projeto de testes + dependências (xUnit, Moq) | 3 | Projeto tests pronto |
+| 1️⃣ | P-02-01 | Configurar projeto de testes + dependências (xUnit, Moq) | 3 | ✅ Projeto tests pronto (PR #26) |
 | 2️⃣ | P-02-02 | Testes unitários - Models e Extensions | 5 | Currency, ExchangeRate, Conversion |
 | 3️⃣ | P-02-03 | Testes unitários - FallbackExchangeRateService | 5 | Cobertura 80%+ |
 | 4️⃣ | P-02-04 | Testes unitários - ExchangeRateApiService (mockada) | 5 | Mock HTTP, sem chamada real |
